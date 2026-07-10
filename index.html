@@ -1,0 +1,546 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ny Aro | Galerie Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="shortcut icon" href="img/Image Ny 2.png">
+    <style>
+        /* --- CONFIGURATION DES COULEURS ET POLICES --- */
+        :root {
+            --bleu-petrole: #173B45;
+            --prune: #6B2D5C;
+            --or-antique: #D8B04C;
+            --lin: #F5F0E8;
+            --noir: #222222;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--lin); /* Fond de style galerie */
+            color: var(--noir);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- MENUS & HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 50px 8% 25px 8%;
+            background-color: #173B45;
+            border-bottom: 6px solid #D8B04C;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: blanchedalmond;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .logo span { color: var(--or-antique); }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: blanchedalmond;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 20px;
+            transition: var(--transition);
+        }
+        nav a:hover { color: var(--or-antique); }
+
+        /* Sélecteur de langue */
+        .lang-selector {
+            background: var(--noir);
+            color: var(--lin);
+            border: 1px solid var(--or-antique);
+            padding: 5px 10px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 120px 8% 80px 8%;
+            min-height: 100vh;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            color: var(--bleu-petrole);
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            border-bottom: 2px solid var(--noir);
+            padding-bottom: 15px;
+        }
+
+        /* --- ACCUEIL (HERO) --- */
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .hero-left h1 {
+            font-family: var(--font-title);
+            font-size: 3.3rem;
+            color: var(--noir);
+            line-height: 1.2;
+        }
+
+        .hero-left p {
+            font-size: 1.1rem;
+            color: var(--bleu-petrole);
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        /* Bouton Télécharger CV */
+        .btn-cv {
+            align-self: flex-start;
+            background-color: var(--prune);
+            color: var(--lin);
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        .btn-cv:hover {
+            background-color: transparent;
+            border-color: var(--noir);
+            color: var(--noir);
+        }
+
+        /* Cadre Tableau Ancien de la photo */
+        .hero-right {
+            display: flex;
+            justify-content: center;
+        }
+
+        .canvas-frame {
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 3/4;
+            background-color: var(--bleu-petrole); /* Couleur de fond par défaut si pas d'image */
+            border: 25px solid var(--or-antique); /* Épaisseur style cadre doré alternatif */
+            outline: 2px solid var(--noir); /* Bordure extérieure noire */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .canvas-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.2) contrast(1.1); /* Petit effet peinture/ancienne */
+        }
+
+        /* --- PROJETS (GALERIE DE VIDÉOS DÉFILANTES) --- */
+        #projets {
+            padding-left: 0;
+            padding-right: 0;
+            overflow: hidden;
+        }
+        #projets .section-title { margin-left: 8%; margin-right: 8%; }
+
+        /* Ticker / Slider Infini Sans Fin */
+        .video-ticker-container {
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+            background-color: var(--noir);
+            padding: 40px 0;
+            border-top: 2px solid var(--noir);
+            border-bottom: 2px solid var(--noir);
+        }
+
+        .video-track {
+            display: flex;
+            gap: 30px;
+            animation: scrollLeft 25s linear infinite;
+            width: max-content;
+        }
+
+        /* Pause au survol pour apprécier la vidéo */
+        .video-ticker-container:hover .video-track {
+            animation-play-state: paused;
+        }
+
+        .video-card {
+            width: 400px;
+            height: 250px;
+            background-color: var(--bleu-petrole);
+            border: 4px solid var(--or-antique);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Défile de moitié car la liste est doublée */
+        }
+
+        /* --- CONTACT (RESEAUX À GAUCHE, INPUTS À DROITE) --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        /* Côté Gauche : Logos Réseaux */
+    
+    .contact-socials-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        background-color: #F5F0E8; /* Fond Lin comme sur l'image */
+        padding: 20px;
+    }
+
+    .social-box {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        text-decoration: none;
+        color: #222222; /* Texte Noir */
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.0rem;
+        font-weight: 600;
+        width: fit-content;
+        transition: transform 0.2s ease;
+    }
+
+    .social-box:hover {
+        transform: translateX(5px); /* Léger effet dynamique au survol */
+        color: var(--or-antique);
+    }
+
+    .icon-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #F5F0E8; /* Icône couleur Lin */
+        font-size: 1.6rem;
+        transition: opacity 0.2s ease;
+    }
+
+    .social-box:hover .icon-circle {
+        opacity: 0.9;
+        background-color: #6B2D5C;
+    }
+
+    /* Attribution des couleurs spécifiques de votre palette */
+    .insta-fb .icon-circle {
+        background-color: #173B45; /* Teinte assombrie de votre Prune #6B2D5C pour coller à l'image */
+    }
+
+    .whatsapp-mail .icon-circle {
+        background-color: #173B45; /* Bleu pétrole pur de votre palette */
+    }
+
+
+        /* Côté Droit : Formulaire */
+        .contact-right form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 15px;
+            border: 2px solid var(--noir);
+            background-color: var(--lin);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--noir);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--prune);
+            background-color: #fff;
+        }
+
+        .btn-submit {
+            background-color: var(--noir);
+            color: var(--lin);
+            padding: 16px;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-submit:hover {
+            background-color: var(--prune);
+            color: var(--lin);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 30px 8%;
+            text-align: center;
+            border-top: 4px solid var(--or-antique);
+            font-size: 0.9rem;
+            font-weight: 500;
+            background-color: #173B45;
+            color: blanchedalmond;
+        }
+
+        /* --- DESIGN RESPONSIVE --- */
+        @media (max-width: 968px) {
+            header { padding: 20px 5%; }
+            section { padding: 100px 5% 60px 5%; }
+            #projets .section-title { margin-left: 5%; margin-right: 5%; }
+            
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .hero-left { align-items: center; }
+            .hero-left h1 { font-size: 2.8rem; }
+            .hero-right { order: -1; } /* Photo en premier sur mobile */
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .contact-left { padding: 30px; }
+            
+            .video-card { width: 300px; height: 188px; }
+        }
+
+        @media (max-width: 480px) {
+            nav { display: none; } /* On garde seulement le sélecteur de langue sur très petit écran */
+            .hero-left h1 { font-size: 2.2rem; }
+            .canvas-frame { max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#accueil" class="logo">NY <span>ARO</span></a>
+        <div class="nav-container">
+            <nav>
+                <a href="#accueil" class="lang-text" data-fr="Accueil" data-en="Home">Accueil</a>
+                <a href="#projets" class="lang-text" data-fr="Projets" data-en="Projects">Projets</a>
+                <a href="#contact" class="lang-text" data-fr="Contact" data-en="Contact">Contact</a>
+            </nav>
+            <select class="lang-selector" onchange="changeLanguage(this.value)">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <section id="accueil">
+        <div class="hero-container">
+            <div class="hero-left">
+                <h1 class="lang-text" data-fr="Une vision, une identité" data-en="One Vision, One Identity">Une vision, une identité</h1>
+                <p class="lang-text" 
+                   data-fr="Je m'appelle Ny Aro OLINJANAHARY et je suis actuellement un étudiant en MBA. Passionné par l'art, les technologies numériques, le montage vidéo et la méditation, j'allie créativité et innovation dans chacun de mes projets. Fort d'expériences en contrôle qualité, marketing digital et administration, je partage à travers ce portfolio mon parcours, mes compétences et ma vision." 
+                   data-en="My name is Ny Aro OLINJANAHARY, and I am currently an MBA student. Passionate about art, digital technologies, video editing, and meditation, I combine creativity and innovation in every project I undertake. With experience in quality control, digital marketing, and administration, this portfolio reflects my journey, skills, and vision.">
+                  Je m'appelle Ny Aro OLINJANAHARY et je suis actuellement un étudiant en MBA. Passionné par l'art, les technologies numériques, le montage vidéo et la méditation, j'allie créativité et innovation dans chacun de mes projets. Fort d'expériences en contrôle qualité, marketing digital et administration, je partage à travers ce portfolio mon parcours, mes compétences et ma vision.
+                </p>
+                <a href="docs/Ny Aro CV.pdf" download="CV_Ny_Aro.pdf" class="btn-cv lang-text" data-fr="Télécharger mon CV" data-en="Download my CV">Télécharger mon CV</a>
+            </div>
+            
+            <div class="hero-right">
+                <div class="canvas-frame">
+                    <img src="img/Image Ny 1.png" alt="Portrait de Ny Aro">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projets">
+        <h2 class="section-title lang-text" data-fr="Expositions & Projets" data-en="Exhibitions & Projects">Expositions & Projets</h2>
+        
+        <div class="video-ticker-container">
+            <div class="video-track">
+                
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="video/08 mars 2025.mp4" type="video/mp4"> </video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="video/Animation Panneau simu by Ny Aro test.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="video/ASMR lait cere.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline>
+                        <source src="video/bonne année 2025 agrival.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="video-card">
+                    <video autoplay muted loop playsinline><source src="video/Demos Nutrilait by Ny Aro test.mp4" type="video/mp4"></video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline><source src="video/happy new year nutrifood.mp4"video/mp4"></video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline><source src="video/Tuto Nutrilait.mp4" type="video/mp4"></video>
+                </div>
+                <div class="video-card">
+                    <video autoplay muted loop playsinline><source src="video/ASMR lait cere.mp4" type="video/mp4"></video>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title lang-text" data-fr="Entrer en contact" data-en="Get in touch">Entrer en contact</h2>
+        
+        <div class="contact-container">
+            <div class="contact-left">
+                <div class="contact-socials-gallery">
+    <a href="https://instagram.com" target="_blank" class="social-box insta-fb">
+        <div class="icon-circle">
+            <i class="fab fa-instagram"></i>
+        </div>
+        <span>Instagram</span>
+    </a>
+
+    <a href="https://facebook.com" target="_blank" class="social-box insta-fb">
+        <div class="icon-circle">
+            <i class="fab fa-facebook-f"></i>
+        </div>
+        <span>Facebook</span>
+    </a>
+
+    <a href="https://wa.me/votre-numero" target="_blank" class="social-box whatsapp-mail">
+        <div class="icon-circle">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <span>WhatsApp</span>
+    </a>
+
+    <a href="mailto:votre-email@exemple.com" class="social-box whatsapp-mail">
+        <div class="icon-circle">
+            <i class="far fa-envelope"></i>
+        </div>
+        <span>E-Mail</span>
+    </a>
+</div>
+            </div>
+
+            <div class="contact-right">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="lang-text" data-fr="Nom" data-en="Name">Nom</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="lang-text" data-fr="Adresse Mail" data-en="Email Address">Adresse Mail</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="lang-text" data-fr="Message" data-en="Message">Message</label>
+                        <textarea id="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit lang-text" data-fr="Envoyer" data-en="Send Message">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ny Aro. Portfolio Galerie D'art.</p>
+    </footer>
+
+    <script>
+        function changeLanguage(lang) {
+            const elementsToTranslate = document.querySelectorAll('.lang-text');
+            
+            elementsToTranslate.forEach(element => {
+                if(lang === 'en') {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-fr');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
