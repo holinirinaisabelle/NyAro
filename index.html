@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -168,10 +167,7 @@
             width: 100%;
             max-width: 380px;
             aspect-ratio: 3/4;
-            background-color: var(--bleu-petrole); /* Couleur de fond par défaut si pas d'image */
-            border: 25px solid var(--or-antique); /* Épaisseur style cadre doré alternatif */
-            outline: 2px solid var(--noir); /* Bordure extérieure noire */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            
             position: relative;
             overflow: hidden;
         }
@@ -232,6 +228,37 @@
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); } /* Défile de moitié car la liste est doublée */
+        }
+        /* --- BOUTON VOIR PLUS (PROJETS) --- */
+        .more-projects-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px; /* Espace sous le bandeau noir */
+        }
+
+        .btn-more {
+            background-color: transparent;
+            color: var(--noir);
+            padding: 14px 35px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            border: 2px solid var(--noir);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-more:hover {
+            background-color: var(--noir);
+            color: var(--lin);
+            border-color: var(--noir);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn-plus{
+            display:flex;
         }
 
         /* --- CONTACT (RESEAUX À GAUCHE, INPUTS À DROITE) --- */
@@ -420,7 +447,7 @@
             
             <div class="hero-right">
                 <div class="canvas-frame">
-                    <img src="img/Image Ny 1.png" alt="Portrait de Ny Aro">
+                    <img src="img/CADRE.png" alt="Portrait de Ny Aro">
                     </div>
             </div>
         </div>
@@ -443,7 +470,7 @@
                 </div>
                 <div class="video-card">
                     <video autoplay muted loop playsinline>
-                        <source src="video/PUB FY TIA-1.mp4" type="video/mp4">
+                        <source src="video/DAVID.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-card">
@@ -474,9 +501,17 @@
                 <div class="video-card">
                     <video autoplay muted loop playsinline><source src="video/ASMR lait cere.mp4" type="video/mp4"></video>
                 </div>
-
+            
             </div>
+            
         </div>
+        <div class="btn-plus">
+        <div class="more-projects-container">
+            <a href="#" id="btn-more-projects" class="btn-more lang-text" data-fr="Voir plus de vidéos" data-en="See more videos">Voir plus de vidéos</a>
+        </div>
+        <div class="more-projects-container">
+            <a href="Affiches.html" id="btn-more-projects" class="btn-more lang-text" data-fr="Voir plus d'images" data-en="See more pictures">Voir plus d'images</a>
+        </div></div>
     </section>
 
     <section id="contact">
