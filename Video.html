@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Vidéo | Ny Aro </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CONFIGURATION DES COULEURS ET POLICES --- */
+        :root {
+            --bleu-petrole: #173B45;
+            --prune: #6B2D5C;
+            --or-antique: #D8B04C;
+            --lin: #F5F0E8;
+            --noir: #222222;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--lin);
+            color: var(--noir);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- MENUS & HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 8%;
+            background-color: var(--bleu-petrole);
+            border-bottom: 6px solid var(--or-antique);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: blanchedalmond;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .logo span { color: var(--or-antique); }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            color: blanchedalmond;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 20px;
+            transition: var(--transition);
+        }
+        nav a:hover { color: var(--or-antique); }
+
+        .lang-selector {
+            background: var(--noir);
+            color: var(--lin);
+            border: 1px solid var(--or-antique);
+            padding: 5px 10px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 140px 8% 80px 8%;
+            min-height: 100vh;
+            display: block;
+        }
+
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            color: var(--bleu-petrole);
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--noir);
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        /* --- PROJETS (GALERIE VIDÉO) --- */
+        #projets {
+            background-color: var(--lin);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto 50px auto;
+        }
+
+        /* Cadre de style tableau d'exposition pour chaque vidéo */
+        .poster-card {
+            background-color: #ffffff;
+            border: 12px solid var(--noir);
+            outline: 2px solid var(--or-antique);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .poster-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(23, 59, 69, 0.3);
+            border-color: var(--bleu-petrole);
+        }
+
+        /* Style Paysage par défaut (16:9) */
+        .poster-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background-color: #000;
+            border-bottom: 2px solid var(--noir);
+            position: relative;
+        }
+
+        /* Style Portrait (9:16) */
+        .poster-card.portrait {
+            max-width: 450px; /* Adapte la largeur globale de la carte portrait */
+        }
+
+        .poster-card.portrait .poster-image {
+            aspect-ratio: 9 / 16;
+        }
+
+        .poster-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Cartel de description sous la vidéo */
+        .poster-info {
+            padding: 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .poster-title {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            color: var(--noir);
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .poster-category {
+            font-size: 0.85rem;
+            color: var(--prune);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Bouton Voir Plus */
+        .more-projects-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn-more {
+            background-color: transparent;
+            color: var(--noir);
+            padding: 14px 35px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            border: 2px solid var(--noir);
+            font-family: var(--font-body);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-more:hover {
+            background-color: var(--bleu-petrole);
+            color: blanchedalmond;
+            border-color: var(--bleu-petrole);
+        }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .contact-socials-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background-color: var(--lin);
+            padding: 20px;
+        }
+
+        .social-box {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-decoration: none;
+            color: var(--noir);
+            font-family: var(--font-body);
+            font-size: 1.0rem;
+            font-weight: 600;
+            width: fit-content;
+            transition: transform 0.2s ease;
+        }
+
+        .social-box:hover {
+            transform: translateX(5px);
+            color: var(--or-antique);
+        }
+
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--lin);
+            font-size: 1.6rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .social-box:hover .icon-circle {
+            opacity: 0.9;
+            background-color: var(--prune);
+        }
+
+        .insta-fb .icon-circle, .whatsapp-mail .icon-circle {
+            background-color: var(--bleu-petrole);
+        }
+
+        .contact-right form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 15px;
+            border: 2px solid var(--noir);
+            background-color: var(--lin);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--noir);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--prune);
+            background-color: #ffffff;
+        }
+
+        .btn-submit {
+            background-color: var(--noir);
+            color: var(--lin);
+            padding: 16px;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--prune);
+            color: var(--lin);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 30px 8%;
+            text-align: center;
+            border-top: 4px solid var(--or-antique);
+            font-size: 0.9rem;
+            font-weight: 500;
+            background-color: var(--bleu-petrole);
+            color: blanchedalmond;
+        }
+
+        /* --- DESIGN RESPONSIVE --- */
+        @media (max-width: 968px) {
+            header { padding: 20px 5%; }
+            section { padding: 100px 5% 60px 5%; }
+            
+            .poster-card { border-width: 8px; }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav { display: none; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#projets" class="logo">NY <span>ARO</span></a>
+        <div class="nav-container">
+            <nav>
+                <a href="index.html" class="lang-text" data-fr="Accueil" data-en="Home">Accueil</a>
+                <a href="#projets" class="lang-text" data-fr="Projets" data-en="Projects">Projets</a>
+                <a href="#contact" class="lang-text" data-fr="Contact" data-en="Contact">Contact</a>
+            </nav>
+            <select class="lang-selector" onchange="changeLanguage(this.value)">
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+    </header>
+
+    <section id="projets">
+        <h2 class="section-title lang-text" data-fr="Galerie montage Vidéo & Créations" data-en="Video editing Gallery & Works">Galerie montage Vidéo & Créations</h2>
+        
+        <div class="gallery-grid">
+
+            <div class="poster-card">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/Tuto Nutrilait.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+        
+            <div class="poster-card ">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/Animation Panneau simu by Ny Aro test.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+            <div class="poster-card">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/bonne année 2025 agrival.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+
+            <div class="poster-card portrait">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/Yoga-3.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+            
+
+            <div class="poster-card">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/Demos Nutrilait by Ny Aro test.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+
+
+            <!-- Vidéo 3 (Format Paysage 16:9) -->
+            <div class="poster-card">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/ASMR lait cere.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+            <!-- Vidéo 4 -->
+             
+
+            <div class="poster-card">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/happy new year nutrifood.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+            <div class="poster-card portrait">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/PARFUM AMOURA PUB.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+            
+
+            <div class="poster-card">
+                <div class="poster-image">
+                    <video controls playsinline preload="metadata">
+                        <source src="video/08 mars 2025.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéo.
+                    </video>
+                </div>
+                <div class="poster-info">
+                    <h3 class="poster-title"></h3>
+                    <p class="poster-category lang-text" data-fr="" data-en=""></p>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="more-projects-container">
+            <button id="btn-more-projects" class="btn-more lang-text" data-fr="Voir plus en privé" data-en="See more in Private">Voir plus en privé</button>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title lang-text" data-fr="Entrer en contact" data-en="Get in touch">Entrer en contact</h2>
+        
+        <div class="contact-container">
+            <div class="contact-left">
+                <div class="contact-socials-gallery">
+                    <a href="https://instagram.com/ny.aro_?igsh=OXRxMnNoNGR0OXF4" target="_blank" class="social-box insta-fb">
+                        <div class="icon-circle">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <span>Instagram</span>
+                    </a>
+
+                    <a href="https://facebook.com/nyaro.olinjanahary" target="_blank" class="social-box insta-fb">
+                        <div class="icon-circle">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <span>Facebook</span>
+                    </a>
+
+                    <a href="https://wa.me/+261342918767" target="_blank" class="social-box whatsapp-mail">
+                        <div class="icon-circle">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <span>WhatsApp</span>
+                    </a>
+
+                    <a href="mailto:holinirinaisabelle@gmail.com" class="social-box whatsapp-mail">
+                        <div class="icon-circle">
+                            <i class="far fa-envelope"></i>
+                        </div>
+                        <span>E-Mail</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-right">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="lang-text" data-fr="Nom" data-en="Name">Nom</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="lang-text" data-fr="Adresse Mail" data-en="Email Address">Adresse Mail</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="lang-text" data-fr="Message" data-en="Message">Message</label>
+                        <textarea id="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit lang-text" data-fr="Envoyer" data-en="Send Message">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Ny Aro OLINJANAHARY</p>
+    </footer>
+
+    <script>
+        // Gestion de la traduction
+        function changeLanguage(lang) {
+            const elementsToTranslate = document.querySelectorAll('.lang-text');
+            
+            elementsToTranslate.forEach(element => {
+                if(lang === 'en') {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-fr');
+                }
+            });
+        }
+
+        // Script de gestion des lectures vidéo
+        const allVideos = document.querySelectorAll('video');
+
+        allVideos.forEach(video => {
+            video.addEventListener('play', () => {
+                // Quand une vidéo commence à jouer, on met en pause toutes les autres
+                allVideos.forEach(otherVideo => {
+                    if (otherVideo !== video) {
+                        otherVideo.pause();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
